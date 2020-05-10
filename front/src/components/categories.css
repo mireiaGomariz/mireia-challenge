@@ -1,0 +1,57 @@
+.mainContainer {
+  background: black;
+  color: #FAA209;
+  height: 160vh;
+  padding: 20px;
+  text-align: center;
+}
+
+.titleGame {
+  text-align: center;
+  font-family: 'Righteous', cursive;
+  font-size: 3em;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.options {
+  padding: 20px;
+  height: 10px;
+  background: black;
+  margin-top: 30px;
+  width: 25%;
+  border: 1px solid #FAA209;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+
+}
+
+.questionContainer {
+  text-align: center;
+}
+
+.buttonAnswer {
+  padding: 20px;
+  height: 10px;
+  background: black;
+  margin-top: 30px;
+  width: 25%;
+  border: 1px solid #FAA209;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+  color: #FAA209;
+}
+
+.score {
+  padding: 20px;
+  font-weight: bold;
+  color: blue;
+
+}
