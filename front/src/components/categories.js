@@ -40,6 +40,9 @@ useEffect(() => {
                 let formatedQuestions = formatQuestions(response.results)
                 console.log(formatedQuestions)
                 setQuestions(formatedQuestions)
+                if (questions.question.includes("*")) {
+                   questions = questions.question.replace(/[^a-zA-Z0-9]/g,'_');
+                 }
               })
               .catch(error => console.log(error));
             };
