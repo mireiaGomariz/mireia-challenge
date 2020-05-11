@@ -1,15 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import './categories.css'
 import Timer from './timer'
+//import function timer from timer.js
+import Shuffle from './shuffle'
+//import shuffle function from shuffle.js
 
 function Categories() {
+  //state
 const [categories, setCategories] = useState([]);
+//set all questions in one category
 const [questions, setQuestions] = useState([]);
+//score of the player
 const [score, setScore] = useState(0);
+// id of the question, used to pass to the new question
 const [id, setId] = useState(1);
+// used to format API content to be more functional.
 const [answer, setAnswer] = useState([])
 
 useEffect(() => {
+  //category Call to API
   fetch(`https://opentdb.com/api_category.php`)
         .then(res => res.json())
         .then(response => {
@@ -21,11 +30,13 @@ useEffect(() => {
       },[]);
 
       const selectCategory = (e) => {
+        // fetch all category selected questions
 
         fetch(`https://opentdb.com/api.php?amount=10&category=${e}`)
               .then(res => res.json())
               .then(response => {
                 console.log(response.results)
+                //reformat api info
                 let formatedQuestions = formatQuestions(response.results)
                 console.log(formatedQuestions)
                 setQuestions(formatedQuestions)
@@ -34,7 +45,9 @@ useEffect(() => {
             };
 
       const formatQuestions = (questions) =>{
+        //change the format of info recived from API add in an object all answers and divided in two propieties, questions and answers, inside answers we can se all answers, correct and incorrect.
         let array_questions = []
+        //create object
         let hash = {}
         questions.map((q, index) => (
           array_questions.push(
@@ -47,6 +60,7 @@ useEffect(() => {
       }
 
       const formatAnswers = (correct_answer, incorrect_answers) =>{
+        // add answers in array and shuffle all of them to print it in different order every time, also push in the array_answers correct answer and pass the value to the function for correct the answer gived for the player.
         let array_answers = []
         let answers = incorrect_answers
         answers.push(correct_answer)
@@ -62,21 +76,12 @@ useEffect(() => {
       }
 
       const correctAnswersValidator = (a, correct_answer) => {
+        // asign a true or false value to correct and incorrect answers and check if option gived for the user mach with correct anserw.
         return correct_answer.includes(a)
       }
 
-      const Shuffle=(a)=>{
-        var j, x, i;
-        for (i = a.length - 1; i > 0; i--) {
-          j = Math.floor(Math.random() * (i + 1));
-          x = a[i];
-          a[i] = a[j];
-          a[j] = x;
-        }
-        return a;
-      }
-
       const checkPoints = (correct) => {
+        //points sistem once the correction is done.
         if (correct){
           setScore(score + 1)
         }else{
@@ -89,7 +94,7 @@ useEffect(() => {
     <div className="mainContainer">
     <h1 className="titleGame">Trivia Game!</h1>
 
-    {questions.length  && id < 9 
+    {questions.length  && id < 9
       ?
       <div className="questionContainer">
       <p className="score">Score: {score}</p>
